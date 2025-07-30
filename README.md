@@ -1,0 +1,74 @@
+# Student Registration (React Only)
+
+A simple student registration system built with React (Vite) and localStorage. It supports:
+
+- **Course Types:** Create, list, update, delete (e.g., Individual, Group, Special).
+- **Courses:** Create, list, update, delete (e.g., Hindi, English, Urdu).
+- **Course Offerings:** Associate a course with a course type, list, update, delete.
+- **Student Registrations:** Register students into offerings, list registrations per offering, and filter offerings by course type.
+
+## Tech
+- React 18 with Vite
+- React Router for navigation
+- State managed with React Context + Reducer
+- Persistence with `localStorage`
+- Minimal CSS (no UI libraries)
+
+## Getting Started
+
+```bash
+npm create vite@latest student-registration-react -- --template react
+# (Skip the above if you're using the files in this repo)
+
+# If using this code from scratch
+npm install
+npm run dev
+```
+
+Open http://localhost:5173 in your browser.
+
+## Data Model
+
+```text
+courseTypes: [{ id, name }]
+courses:     [{ id, name }]
+offerings:   [{ id, courseTypeId, courseId }]
+registrations: [{ id, offeringId, studentName, email, phone }]
+```
+
+## Validation & Error Handling
+- Names required, 2–30 chars, must be unique (case-insensitive).
+- Offerings must be unique (a specific course + type pair can exist only once).
+- Email format checked; phone optional with basic pattern.
+- Deleting a course/type cascades to offerings and registrations.
+
+## Version Control & GitHub
+
+```bash
+git init
+git add .
+git commit -m "feat: student registration app"
+git branch -M main
+git remote add origin https://github.com/<your-username>/<your-repo>.git
+git push -u origin main
+```
+
+## Deployment
+
+**Vercel (recommended):**
+1. Push to GitHub.
+2. Go to Vercel, import your repo, framework = Vite.
+3. Deploy. (No extra config needed.)
+
+**Netlify:**
+- Build command: `npm run build`
+- Publish directory: `dist`
+
+**GitHub Pages:**
+- Uncomment and set `base` in `vite.config.js` to `'/<repo-name>/'`.
+- Build: `npm run build`
+- Serve `dist` with GitHub Pages (e.g., via `Actions` or a static hosting workflow).
+
+## Notes
+- This implementation stores data in the browser. For multi-user persistence, add an API later.
+- No external UI library is used to keep it "React only".
